@@ -470,7 +470,24 @@
             document.getElementById(id).innerHTML = contents[id];
         }
 
-        function showContent(targetId) {
+        // Hash mapping for permalinks
+        const contentToHash = {
+            'content-0': 's0-orientation',
+            'content-1': 's1-smart-tool',
+            'content-2': 's2-dialog',
+            'content-3': 's3-thinking-accelerator',
+            'content-4': 's4-expert-team'
+        };
+        
+        const hashToContent = {
+            's0-orientation': 'content-0',
+            's1-smart-tool': 'content-1',
+            's2-dialog': 'content-2',
+            's3-thinking-accelerator': 'content-3',
+            's4-expert-team': 'content-4'
+        };
+
+        function showContent(targetId, updateHash = true) {
             contentSections.forEach(section => {
                 section.classList.toggle('hidden', section.id !== targetId);
             });
@@ -478,6 +495,34 @@
                 link.classList.toggle('active', link.dataset.target === targetId);
             });
             mainContent.scrollTop = 0; // Scroll to top
+            
+            // Update URL hash for permalink functionality
+            if (updateHash) {
+                const hash = contentToHash[targetId];
+                if (targetId === 'content-0') {
+                    // Remove hash for content-0 (home page)
+                    history.pushState(null, null, window.location.pathname);
+                } else if (hash) {
+                    history.pushState(null, null, `#${hash}`);
+                }
+            }
+        }
+
+        // Handle hash changes (back/forward buttons, direct links)
+        function handleHashChange() {
+            const hash = window.location.hash.slice(1); // Remove #
+            let targetId;
+            
+            if (hash === '' || hash === 's0-orientation') {
+                targetId = 'content-0';
+            } else if (hashToContent[hash]) {
+                targetId = hashToContent[hash];
+            } else {
+                // Invalid hash, default to content-0
+                targetId = 'content-0';
+            }
+            
+            showContent(targetId, false); // Don't update hash to avoid infinite loop
         }
 
         sidebarLinks.forEach(link => {
@@ -570,8 +615,11 @@
         });
 
 
-        // Initialize first page
-        showContent('content-0');
+        // Add hash change event listener
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Initialize page based on current hash
+        handleHashChange();
     });
     </script>
 </body>
