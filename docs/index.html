@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI入門講座</title>
+    <meta property="og:title" content="生成AI入門講座 | AIを思考のパートナーに" />
+    <meta property="og:description" content="AIを「思考のパートナー」として使いこなし、日々の学習や生活の質を向上させるための中高生向け入門講座。対話を通じて問題解決能力や発想力を高める方法を学びます。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yamamoto-febc.github.io/study-gen-ai/" />
+    <meta property="og:image" content="https://yamamoto-febc.github.io/study-gen-ai/og_image.png" />
+    <meta property="og:site_name" content="生成AI入門講座" />
+    <meta property="og:locale" content="ja_JP" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="生成AI入門講座 | AIを思考のパートナーに" />
+    <meta name="twitter:description" content="AIを「思考のパートナー」として使いこなし、日々の学習や生活の質を向上させるための中高生向け入門講座。対話を通じて問題解決能力や発想力を高める方法を学びます。" />
+    <meta name="twitter:image" content="https://yamamoto-febc.github.io/study-gen-ai/og_image.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #4A4A4A;
+        }
+        /* --- Sidebar Styles --- */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .sidebar-link.active {
+            background-color: #A58A73;
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+        /* --- Content-specific styles from original files --- */
+        .prompt-block {
+            background-color: #F3F4F6;
+            border-left: 4px solid #A58A73;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .bad-prompt { border-left-color: #F87171; }
+        .good-prompt { border-left-color: #34D399; }
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #FFFFFF;
+            color: #6B7280;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .copy-btn:hover { background-color: #F9FAFB; color: #1F2937; }
+        .timeline-item .timeline-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+        }
+        .timeline-item.active .timeline-content {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .timeline-dot { transition: all 0.3s ease; }
+        .timeline-item.active .timeline-dot { background-color: #A58A73; transform: scale(1.25); }
+        .timeline-item.active .timeline-title { color: #A58A73; }
+        .tab-btn.active { background-color: #A58A73; color: #FFFFFF; }
+        .step-indicator { background-color: #D4C5B8; color: #4A4A4A; }
+        .step-indicator.active { background-color: #A58A73; color: #FFFFFF; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="flex h-screen bg-[#FDFBF8]">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar fixed top-0 left-0 z-40 w-72 h-screen bg-white shadow-lg p-4 transition-transform -translate-x-full sm:translate-x-0">
+            <h2 class="text-2xl font-bold text-[#A58A73] mb-8 text-center">目次</h2>
+            <nav>
+                <ul class="space-y-2">
+                    <li><a href="#" class="sidebar-link block p-3 rounded-lg" data-target="content-0">第0回 オリエンテーション</a></li>
+                    <li><a href="#" class="sidebar-link block p-3 rounded-lg" data-target="content-1">第1回 AIを「賢い道具」に</a></li>
+                    <li><a href="#" class="sidebar-link block p-3 rounded-lg" data-target="content-2">第2回 AIとの「対話」</a></li>
+                    <li><a href="#" class="sidebar-link block p-3 rounded-lg" data-target="content-3">第3回 AIは「思考加速ツール」</a></li>
+                    <li><a href="#" class="sidebar-link block p-3 rounded-lg" data-target="content-4">第4回 AIを「専門家チーム」に</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div id="main-content" class="flex-1 p-4 sm:p-10 sm:ml-72 overflow-y-auto">
+            <!-- Hamburger Menu for Mobile -->
+            <button id="menu-toggle" class="sm:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+
+            <!-- Content Sections -->
+            <div id="content-0" class="content-section max-w-4xl mx-auto">
+                <!-- Content from 第0回 will be injected here -->
+            </div>
+            <div id="content-1" class="content-section max-w-4xl mx-auto hidden">
+                <!-- Content from 第1回 will be injected here -->
+            </div>
+            <div id="content-2" class="content-section max-w-4xl mx-auto hidden">
+                <!-- Content from 第2回 will be injected here -->
+            </div>
+            <div id="content-3" class="content-section max-w-4xl mx-auto hidden">
+                <!-- Content from 第3回 will be injected here -->
+            </div>
+            <div id="content-4" class="content-section max-w-4xl mx-auto hidden">
+                <!-- Content from 第4回 will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebar = document.getElementById('sidebar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mainContent = document.getElementById('main-content');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        const contents = {
+            "content-0": `
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[#A58A73] mb-4">生成AI入門講座 第0回</h1>
+                    <p class="text-lg text-gray-600">オリエンテーション</p>
+                </header>
+                <main>
+                    <section id="introduction" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">はじめに：AIを「思考のパートナー」にしよう</h2>
+                        <div class="space-y-4 text-gray-700 leading-relaxed bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p>この講座のゴールは、AIを<strong>普段使い</strong>できるようになり、皆さんの<strong>日々の学習や生活の質を向上させる</strong>ことです。</p>
+                            <p>これからの4回の講座を通じて、皆さんはAIを単なる「便利な検索ツール」ではなく、レポート作成やアイデア出しを手伝ってくれる、頼れる<strong>「思考のパートナー」</strong>として使いこなす方法を学んでいきます。AIとの対話を通じて、皆さん自身の問題解決能力や発想力を高めていきましょう。</p>
+                        </div>
+                    </section>
+                    <section id="prerequisites" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">対象となる方・必要なもの</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"><div class="text-4xl mb-3">🎯</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">対象者</h3><p class="text-gray-600">生成AIに興味のある中高生（基本的なPC操作ができる方）</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"><div class="text-4xl mb-3">🛠️</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">使うツール</h3><p class="text-gray-600">ChatGPTやGemini（Webブラウザ上で利用）</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200"><div class="text-4xl mb-3">📝</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">あると便利なもの</h3><p class="text-gray-600">テキストエディタ（メモ帳など）</p></div>
+                        </div>
+                    </section>
+                    <section id="core-concept" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">この講座を貫く一つの考え方</h2>
+                        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                <div class="text-center"><div class="text-5xl mb-4">🌪️</div><h3 class="text-2xl font-bold text-[#A58A73] mb-2">発散 (Divergence)</h3><p class="text-gray-600">アイデアを広げ、可能性を探り、一人では思いつかないような視点を見つけること。<strong>思考の範囲を広げる</strong>ことを目指します。</p></div>
+                                <div class="text-center"><div class="text-5xl mb-4">🎯</div><h3 class="text-2xl font-bold text-[#A58A73] mb-2">収束 (Convergence)</h3><p class="text-gray-600">広がったアイデアを整理し、評価し、レポートのように一つの形にまとめていくこと。<strong>思考を絞り込み、形にする</strong>ことを目指します。</p></div>
+                            </div>
+                            <p class="text-center text-gray-700 mt-8">この講座では、AIを使ってこの両方のプロセスを体験していきます。</p>
+                        </div>
+                    </section>
+                    <section id="roadmap" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">全4回の旅：AIとの関係性を進化させるロードマップ</h2>
+                        <p class="text-gray-700 leading-relaxed mb-8">この講座では、「発散」と「収束」を意識しながら、以下の4つのステップでAIとの関係性を段階的に進化させていきます。各ステップをクリックして詳細を確認してみましょう。</p>
+                        <div class="relative">
+                            <div class="absolute left-4 top-0 h-full w-0.5 bg-[#D4C5B8]" aria-hidden="true"></div>
+                            <div id="timeline-container" class="space-y-8">
+                                <div class="timeline-item pl-12 relative cursor-pointer"><div class="timeline-dot absolute left-1.5 top-1 w-5 h-5 rounded-full bg-[#D4C5B8] border-4 border-white"></div><h3 class="timeline-title text-xl font-bold text-gray-800 transition">第1回：AIを「アシスタント」にする【基本操作編】</h3><div class="timeline-content"><p class="text-gray-600">まずは基本から。AIに的確な指示を出し、レポートの下書きや調べ物など、狙い通りの答えを引き出す方法を学びます。AIを便利なアシスタントとして使う第一歩です。</p></div></div>
+                                <div class="timeline-item pl-12 relative cursor-pointer"><div class="timeline-dot absolute left-1.5 top-1 w-5 h-5 rounded-full bg-[#D4C5B8] border-4 border-white"></div><h3 class="timeline-title text-xl font-bold text-gray-800 transition">第2回：AIを「共同作業者」にする【対話・共創編】</h3><div class="timeline-content"><p class="text-gray-600">一方的な指示から、双方向のコミュニケーションへ。AIに「質問してもらいながら」対話を進め、レポートの構成案など、ゼロから一緒に成果物を作り上げます。</p></div></div>
+                                <div class="timeline-item pl-12 relative cursor-pointer"><div class="timeline-dot absolute left-1.5 top-1 w-5 h-5 rounded-full bg-[#D4C5B8] border-4 border-white"></div><h3 class="timeline-title text-xl font-bold text-gray-800 transition">第3回：AIを「分析・評価ツール」にする【情報処理編】</h3><div class="timeline-content"><p class="text-gray-600">AIの新しい顔を引き出します。与えられた情報を整理・分析させたり、自分では気づけない意外な視点を探させたりして、思考を深める方法を学びます。</p></div></div>
+                                <div class="timeline-item pl-12 relative cursor-pointer"><div class="timeline-dot absolute left-1.5 top-1 w-5 h-5 rounded-full bg-[#D4C5B8] border-4 border-white"></div><h3 class="timeline-title text-xl font-bold text-gray-800 transition">第4回：AIを「多才な専門家」として活用する【応用実践編】</h3><div class="timeline-content"><p class="text-gray-600">最終回では、AIをプログラマーやアイデア発想パートナーに見立てます。ブレインストーミングで多様な視点からアイデアを出してもらい、一人では思いつかないような発想を広げるテクニックを実践します。</p></div></div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <footer class="text-center mt-20 pt-10 border-t border-gray-200">
+                    <h2 class="text-2xl font-bold text-[#A58A73] mb-6">この講座で大切にしたいこと</h2>
+                    <p class="text-gray-700 leading-relaxed max-w-2xl mx-auto">この講座は、知識を暗記する場ではありません。実際に手を動かし、AIとの対話を楽しみながら、新しい思考法を<strong>「体験」</strong>する場です。失敗を恐れず、色々な質問や指示を試してみてください。</p>
+                    <p class="text-gray-700 leading-relaxed mt-4 max-w-2xl mx-auto">AIを使いこなすスキルは、これからの時代を生きる皆さんにとって、間違いなく強力な武器になります。この4回の旅を通じて、AIと共に成長していく楽しさを感じてもらえれば幸いです。</p>
+                    <p class="font-bold text-[#A58A73] text-lg mt-8">それでは、第1回の講座でお会いしましょう！</p>
+                    <div class="mt-12 flex justify-center">
+                        <button class="next-btn bg-[#A58A73] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#8e7661] transition" data-next="content-1">第1回へ進む →</button>
+                    </div>
+                </footer>
+            `,
+            "content-1": `
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[#A58A73] mb-4">生成AI入門講座 第1回</h1>
+                    <p class="text-lg text-gray-600">AIを「賢い道具」として使いこなそう</p>
+                </header>
+                <main>
+                    <section id="introduction" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">はじめに</h2>
+                        <div class="space-y-4 text-gray-700 leading-relaxed">
+                            <p>「生成AI」と聞くと、文章を作ったり絵を描いたりするイメージが強いかもしれません。しかし、その本当の実力は、皆さんが日々取り組んでいる<strong>専門的な学習をサポートする</strong>場面でこそ発揮されます。</p>
+                            <p>この講座では、AIの基本的な仕組みと限界を理解した上で、皆さんの学習や将来の研究、仕事の生産性を劇的に向上させるための<strong>「賢い使い方」</strong>をマスターすることを目指します。</p>
+                        </div>
+                    </section>
+                    <section id="warmup" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">ウォームアップ：AIの実力を体感しよう</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">まずはAIが学習でどれだけ強力なアシスタントになるか、物理の問題を使って体感してみましょう。</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <h3 class="font-semibold text-lg mb-4">【AIへの指示】</h3>
+                            <div class="relative"><pre class="prompt-block p-4 rounded-md overflow-x-auto"><code class="language-text">以下の物理の問題を、小学生にも分かる直感的なイメージを各ステップの途中に短く挟みながら段階的に解いてください。\n各ステップで、使用する公式、代入する値、計算過程、そして単位を付けた答えを明確に示してください。公式の名称は高専生向けに正式名称を用いてください。\n\n【問題】\n高さ19.6mのビルの屋上から、ボールを初速度9.8m/sで真上に投げ上げました。重力加速度を9.8m/s²とし、空気抵抗は無視します。ボールが最高点に達するのは何秒後ですか？</code></pre><button class="copy-btn">コピー</button></div>
+                        </div>
+                    </section>
+                    <section id="basics" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">1. 生成AIってなんだろう？</h2>
+                        <div class="space-y-8">
+                            <div><h3 class="text-xl font-semibold mb-3 text-gray-800">LLMの仕組み：超高性能な「予測変換」</h3><p class="text-gray-700 leading-relaxed">皆さんが普段スマートフォンで文字入力する時、次に来る言葉を予測してくれますよね。生成AI（特にLLM）の基本的な仕組みは、あの「予測変換」をものすごく高性能にしたもの、とイメージしてください。膨大な量の文章やデータを学習し、「この単語の次には、この単語が来る確率が高い」ということを計算して、最も<strong>"もっともらしい"</strong>文章や解法を生成しているのです。</p></div>
+                            <div><h3 class="text-xl font-semibold mb-3 text-gray-800">AIの限界：「もっともらしいウソ」に注意！</h3><p class="text-gray-700 leading-relaxed">「確率」で答えを作っているため、AIには重要な限界があります。平気でウソをつくこと（<strong>ハルシネーション</strong>）があったり、情報が古かったりします。<strong>「AIの答えは、必ず疑う」</strong>。これが鉄則です。</p></div>
+                            <div><h3 class="text-xl font-semibold mb-4 text-gray-800">AIと付き合う上での「3つの重要な約束」</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-red-200"><div class="text-3xl mb-3">🔒</div><h4 class="font-bold text-lg mb-2 text-red-700">1. 個人・秘密情報を入力しない</h4><p class="text-gray-600 text-sm">自分の住所や未公開の研究データ等は入力厳禁。情報漏洩のリスクがあります。</p></div>
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-amber-200"><div class="text-3xl mb-3">✍️</div><h4 class="font-bold text-lg mb-2 text-amber-700">2. 課題を丸写ししない</h4><p class="text-gray-600 text-sm">AIは学習の補助ツール。丸写しは不正行為であり、自分のためになりません。</p></div>
+                                    <div class="bg-white p-6 rounded-lg shadow-sm border border-blue-200"><div class="text-3xl mb-3">🩺</div><h4 class="font-bold text-lg mb-2 text-blue-700">3. 専門的な判断は任せない</h4><p class="text-gray-600 text-sm">健康や法律など、重要な判断は必ず専門家に相談しましょう。</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="prompting" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">2. AIへの「良い指示」をマスターしよう</h2>
+                        <p class="text-gray-700 leading-relaxed mb-8">AIから精度の高い回答を引き出すコツは、<strong>AIに「役割」を与え、できるだけ「具体的に」質問する</strong>ことです。悪い例と良い例を比べてみましょう。</p>
+                        <div class="space-y-10">
+                            <div><h3 class="text-xl font-semibold mb-4 text-gray-800">デモ1：専門的な概念を質問する</h3>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                    <div><h4 class="font-semibold mb-2 text-red-600">【悪い指示の例】</h4><div class="relative"><pre class="prompt-block bad-prompt p-4 rounded-md"><code>マクスウェルの方程式について教えて。</code></pre><button class="copy-btn">コピー</button></div></div>
+                                    <div><h4 class="font-semibold mb-2 text-green-600">【良い指示の例】</h4><div class="relative"><pre class="prompt-block good-prompt p-4 rounded-md"><code class="language-text">あなたは物理学の優秀な家庭教師です。\n電磁気学を学び始めたばかりの僕に、「マクスウェルの方程式」がそれぞれどんな物理現象を表しているのか、身近な例を交えながら直感的に分かるように説明してください。</code></pre><button class="copy-btn">コピー</button></div></div>
+                                </div>
+                            </div>
+                            <div><h3 class="text-xl font-semibold mb-4 text-gray-800">デモ2：計算問題を質問する</h3>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                    <div><h4 class="font-semibold mb-2 text-red-600">【悪い指示の例】</h4><div class="relative"><pre class="prompt-block bad-prompt p-4 rounded-md"><code>時速60kmで15分間走った時の移動距離は？</code></pre><button class="copy-btn">コピー</button></div></div>
+                                    <div><h4 class="font-semibold mb-2 text-green-600">【良い指示の例】</h4><div class="relative"><pre class="prompt-block good-prompt p-4 rounded-md"><code class="language-text">時速60kmで15分間走った時の移動距離を求めたいです。小学生にも分かるように、計算の過程や使う公式も合わせて教えてください。</code></pre><button class="copy-btn">コピー</button></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="exercise" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">3. プロンプトを改善してみよう</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">次の「悪い指示」を、デモで学んだコツ（<strong>役割を与える、具体的に質問する</strong>）を使って改善してみましょう。</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p class="font-semibold mb-2">【お題】</p>
+                            <div class="relative"><pre class="prompt-block bad-prompt p-4 rounded-md mb-6"><code>リニアモーターカーの仕組みについて教えて。</code></pre><button class="copy-btn">コピー</button></div>
+                            <label for="improved-prompt" class="block font-semibold mb-2">【改善後の指示を書いてみよう】</label>
+                            <textarea id="improved-prompt" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#A58A73] focus:border-transparent transition" placeholder="例：あなたは技術ジャーナリストです。乗り物好きの中学生に、リニアモーターカーが浮いて進む仕組みを、磁石のN極とS極の関係を使って分かりやすく説明してください。"></textarea>
+                            <label for="improvement-point" class="block font-semibold mt-6 mb-2">【改善のポイントを1文でまとめよう】</label>
+                            <input type="text" id="improvement-point" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#A58A73] focus:border-transparent transition" placeholder="例：AIに役割を与え、説明の対象者を具体的に指定した。">
+                        </div>
+                    </section>
+                    <section id="practice" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">4. 実践：AIと「次のアクションプラン」を立てよう</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">最後に、今日学んだことを使って、AIにあなたのための具体的な計画を立ててもらいましょう。AIを「自分専用の優秀なアシスタント」として使う練習です。</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p class="font-semibold text-lg mb-4">以下のどちらか、あるいはあなた自身が今抱えている課題について、AIに具体的なアクションプランを作成させてみましょう。</p>
+                            <ul class="list-disc list-inside space-y-2 mb-6">
+                                <li><strong>テーマ例1：学習計画</strong> - 来週の数学の小テスト「三角関数」範囲の、3日間でできる効率的な学習計画</li>
+                                <li><strong>テーマ例2：レポート作成</strong> - 「再生可能エネルギー」に関するレポートの構成案（目次）と、調べるべきキーワード</li>
+                            </ul>
+                            <h4 class="font-semibold mb-2">【指示の出し方のヒント】</h4>
+                            <div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">あなたは優秀な学習プランナーです。来週の数学の小テスト「三角関数」に向けて、僕が3日間で効率よく復習できるように、1日ごとの学習計画を立ててください。重要な公式や、つまずきやすいポイントも教えてください。</code></pre><button class="copy-btn">コピー</button></div>
+                        </div>
+                    </section>
+                </main>
+                <footer class="text-center mt-20 pt-10 border-t border-gray-200">
+                    <h2 class="text-2xl font-bold text-[#A58A73] mb-6">おわりに</h2>
+                    <p class="text-gray-700 leading-relaxed mb-8">お疲れ様でした！AIは非常に強力なツールですが、万能ではありません。その限界を正しく理解し、責任を持って利用することが、これからの技術者・研究者にとって不可欠なスキルとなります。</p>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">やってみよう：AIと好奇心を探求する</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">家に帰ったら、あるいは移動中に、今日学んだことを使ってAIと少し「深掘り対話」をしてみませんか？</p>
+                        <ol class="list-decimal list-inside text-left max-w-md mx-auto space-y-2 text-gray-600">
+                            <li><strong>テーマを決める</strong>：今日の授業で気になったこと、好きなゲームやアニメの裏設定、ニュースで見た新しい技術など、何でもOKです。</li>
+                            <li><strong>最初の質問をする</strong>：「〇〇について教えて」と聞いてみましょう。</li>
+                            <li><strong>対話を続ける</strong>：AIの答えに対して、<strong>「それはなぜ？」「具体的にはどういうこと？」「他の例はある？」</strong>と、最低5回は質問を続けてみましょう。</li>
+                        </ol>
+                    </div>
+                     <div class="mt-12 flex justify-center">
+                        <button class="next-btn bg-[#A58A73] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#8e7661] transition" data-next="content-2">第2回へ進む →</button>
+                    </div>
+                </footer>
+            `,
+            "content-2": `
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[#A58A73] mb-4">生成AI入門講座 第2回</h1>
+                    <p class="text-lg text-gray-600">AIとの「対話」で成果物を作り上げる</p>
+                </header>
+                <main>
+                    <section id="introduction" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">はじめに：AIとの付き合い方を進化させよう</h2>
+                        <div class="space-y-4 text-gray-700 leading-relaxed bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p>皆さん、こんにちは！第2回講座へようこそ。</p>
+                            <p>第1回では、AIに「あなたは〇〇です」と役割を与え、「〇〇な僕に、〇〇のように説明して」と具体的に指示を出すことで、AIが賢い<strong>アシスタント</strong>になることを学びました。</p>
+                            <p>今回は、その関係をさらに一歩進めます。私たちが一方的に指示を出すだけでなく、AIに<strong>「質問してもらいながら」</strong>一緒に考え、成果物を作り上げる、新しい付き合い方をマスターしましょう。今回のゴールは、AIを頼れる<strong>「共同作業者（コラボレーター）」</strong>にすることです。</p>
+                        </div>
+                    </section>
+                    <section id="core-technique" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">1. AIに「聞き役」になってもらおう</h2>
+                        <div class="space-y-8">
+                            <div><h3 class="text-xl font-semibold mb-3 text-gray-800">コンセプト</h3><p class="text-gray-700 leading-relaxed">レポート作成などを始めるとき、最初から完璧な指示を考えるのは難しいですよね。そんな時、AIに<strong>「こっちに質問してよ」</strong>とお願いして、思考の整理を手伝ってもらう、という非常に強力なアプローチがあります。</p></div>
+                            <div><h3 class="text-xl font-semibold mb-3 text-gray-800">✨ 魔法のひとこと</h3><p class="text-gray-700 leading-relaxed mb-4">このアプローチを実現するための、シンプルで覚えやすい「魔法のひとこと」を紹介します。</p><div class="relative bg-white p-6 rounded-lg shadow-sm border border-gray-200"><pre class="prompt-block p-4 rounded-md overflow-x-auto"><code class="language-text">「〇〇についてレポートを書きたいので、手伝ってください。良いレポートにするために何が必要か、僕に質問しながら進めてもらえますか？」</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div><h3 class="text-xl font-semibold mb-3 text-gray-800">どんな風に進むの？ (デモ)</h3>
+                                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-4">
+                                    <div class="flex items-start gap-3"><div class="bg-blue-100 text-blue-800 p-2 rounded-full text-sm font-bold">講師</div><div class="bg-gray-100 p-3 rounded-lg flex-1"><p>「自動運転技術についてレポートを書きたいので、手伝ってください。良いレポートにするために何が必要か、僕に質問しながら進めてもらえますか？」</p></div></div>
+                                    <div class="flex items-start gap-3"><div class="bg-green-100 text-green-800 p-2 rounded-full text-sm font-bold">AI</div><div class="bg-gray-100 p-3 rounded-lg flex-1"><p>承知いたしました。まず、このレポートは誰が読むことを想定していますか？</p></div></div>
+                                    <div class="flex items-start gap-3"><div class="bg-blue-100 text-blue-800 p-2 rounded-full text-sm font-bold">講師</div><div class="bg-gray-100 p-3 rounded-lg flex-1"><p>技術に詳しい大学生向けです。</p></div></div>
+                                     <div class="flex items-start gap-3"><div class="bg-green-100 text-green-800 p-2 rounded-full text-sm font-bold">AI</div><div class="bg-gray-100 p-3 rounded-lg flex-1"><p>ありがとうございます。では次に、特に重点を置いて伝えたいポイントは何ですか？</p></div></div>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed mt-4">このように、AIとの自然なチャットを通じて、レポートに何を書くべきかが明確になっていきます。</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="main-exercise" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">2. AIと対話しながら「ミニ技術レポート」を作ってみよう</h2>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <div class="mb-6"><label for="tech-theme" class="block font-semibold text-lg mb-2">【テーマ】あなたが興味のある技術テーマを選んでください。</label><input type="text" id="tech-theme" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#A58A73] focus:border-transparent transition" placeholder="例：VR、ドローン、再生可能エネルギー、量子コンピュータなど"></div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="w-full md:w-1/3">
+                                    <nav class="flex flex-row md:flex-col gap-2">
+                                        <button id="tab-btn-1" class="tab-btn active flex items-center gap-3 text-left w-full p-3 rounded-md border-2 border-transparent"><span class="step-indicator active w-8 h-8 rounded-full flex items-center justify-center font-bold">1</span><span>対話の開始</span></button>
+                                        <button id="tab-btn-2" class="tab-btn flex items-center gap-3 text-left w-full p-3 rounded-md border-2 border-transparent"><span class="step-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span><span>ヒアリング</span></button>
+                                        <button id="tab-btn-3" class="tab-btn flex items-center gap-3 text-left w-full p-3 rounded-md border-2 border-transparent"><span class="step-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold">3</span><span>構成案の作成</span></button>
+                                        <button id="tab-btn-4" class="tab-btn flex items-center gap-3 text-left w-full p-3 rounded-md border-2 border-transparent"><span class="step-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold">4</span><span>本文の質を高める</span></button>
+                                    </nav>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <div id="tab-content-1" class="tab-content"><h3 class="font-bold text-xl mb-4">ステップ1：対話の開始 (5分)</h3><p class="text-gray-600 mb-4">学んだ「魔法のひとこと」を使って、あなたのテーマでAIに対話を開始させてみましょう。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「VR技術についてレポートを書きたいので、手伝ってください。良いレポートにするために何が必要か、僕に質問しながら進めてもらえますか？」</code></pre><button class="copy-btn">コピー</button></div></div>
+                                    <div id="tab-content-2" class="tab-content hidden"><h3 class="font-bold text-xl mb-4">ステップ2：AIからのヒアリングに答える (5分)</h3><p class="text-gray-600 mb-4">AIがしてくる2～3個の簡単な質問に、チャット感覚で答えていきましょう。難しく考えすぎず、普段友人と話すように答えるのがコツです。</p><p class="font-semibold text-sm text-gray-500">（AIからの質問例：「レポートの目的は何ですか？」「どのくらいの長さが理想ですか？」）</p></div>
+                                    <div id="tab-content-3" class="tab-content hidden"><h3 class="font-bold text-xl mb-4">ステップ3：構成案の共同作成 (10分)</h3><p class="text-gray-600 mb-4">ここが非常に重要なステップです。いきなり文章を書き始めるのではなく、まずはレポートの<strong>「設計図」</strong>となる構成案（目次）をAIと一緒に作ることで、効率よく作成できます。</p><p class="text-gray-600 mb-4">提案された構成案を確認し、人間と話すように修正や追加を指示してみましょう。</p><p class="font-semibold text-sm text-gray-500">指示の例：「いいね！でも、『VR技術の倫理的な課題』という項目も追加してください。」</p></div>
+                                    <div id="tab-content-4" class="tab-content hidden"><h3 class="font-bold text-xl mb-4">ステップ4：本文の質を高める (10分)</h3><p class="text-gray-600 mb-4">完成した構成案に基づき、AIに本文の一部を生成させ、追加の指示で質を高める練習をしましょう。</p><div class="space-y-4"><div><h4 class="font-semibold">① お手本を見せる</h4><p class="text-sm text-gray-500 mb-2">状況：AIが書いた文章の文体が気に入らない時。</p><p class="font-semibold text-sm text-gray-500">指示の例：「ありがとう。文の終わり方を『～である調』にしてほしいな。<strong>例えば『これは重要な技術である。』みたいな感じで。</strong>」</p></div><div><h4 class="font-semibold">② 深掘りする</h4><p class="text-sm text-gray-500 mb-2">状況：AIの出した結論の根拠が知りたい時。</p><p class="font-semibold text-sm text-gray-500">指示の例：「その結論は面白いね。<strong>どうしてそう言えるのか、理由を順を追って詳しく教えて。</strong>」</p></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <footer class="text-center mt-20 pt-10 border-t border-gray-200">
+                    <h2 class="text-2xl font-bold text-[#A58A73] mb-6">3. まとめ：AIは「育てる」パートナー</h2>
+                    <p class="text-gray-700 leading-relaxed mb-8">お疲れ様でした！今日の演習では、AIとの対話を通じて、ゼロからレポートが形になっていくプロセスを体験できたかと思います。</p>
+                    <div class="space-y-8">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-green-200"><h3 class="font-bold text-lg mb-2 text-green-800">【Tips】「アウトライン・ファースト」を心がけよう</h3><p class="text-gray-600">今回のように、まず目次や構成案を確定させてから本文の作成に入る方法は、AIを使う上で非常に効果的です。「アウトライン・ファースト」と覚えておきましょう。</p><p class="text-sm text-gray-500 mt-2"><strong>なぜ？</strong>：全体の構造に合意してから細部を作るので、後からの大きな手戻りを防げます。</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-blue-200"><h3 class="font-bold text-lg mb-2 text-blue-800">テクニックの種明かし</h3><p class="text-gray-600">実は、皆さんが今日自然に行った<strong>「お手本を見せる」</strong>や<strong>「理由を詳しく聞く」</strong>といった対話は、AIの性能を上げるための高度なテクニックです。専門的にはそれぞれ「Few-Shotプロンプティング」「Chain of Thought」などと呼ばれています。</p><p class="text-gray-600 mt-2"><strong>難しい言葉を覚える必要はありません</strong>。大切なのは、自然な会話を通じて意図を伝え、一緒に考え、時には修正しながら成長させていくという感覚です。</p></div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mt-8">AIは、一度で完璧な答えを出す魔法の箱ではありません。対話を重ねることで賢くなっていく、あなたの頼れる<strong>「共同作業者」</strong>なのです。ぜひ、これからの学習に役立ててください。</p>
+                     <div class="mt-12 flex justify-center">
+                        <button class="next-btn bg-[#A58A73] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#8e7661] transition" data-next="content-3">第3回へ進む →</button>
+                    </div>
+                </footer>
+            `,
+            "content-3": `
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[#A58A73] mb-4">生成AI入門講座 第3回</h1>
+                    <p class="text-lg text-gray-600">AIで分析・評価を行い「思考加速ツール」にする</p>
+                </header>
+                <main>
+                    <section id="introduction" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">はじめに：AIの新しい顔を引き出す</h2>
+                        <div class="space-y-4 text-gray-700 leading-relaxed bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p>皆さん、こんにちは！第3回講座へようこそ。</p>
+                            <p>第2回では、AIに「質問してもらいながら」対話を進め、一緒に成果物を作り上げる方法を学び、AIが頼れる<strong>「共同作業者」</strong>になることを体験しました。</p>
+                            <p>今回は、AIのさらに新しい顔を引き出します。AIに単に文章を作らせるだけでなく、与えられた情報を<strong>「分析」</strong>させたり、こちらの考えを<strong>「評価(レビュー)」</strong>させたりする、より高度な使い方をマスターしましょう。今回のゴールは、AIを分析・評価ツールとして使いこなし、強力な<strong>「思考加速ツール」</strong>として活用できるようになることです。</p>
+                        </div>
+                    </section>
+                    <section id="techniques" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">1. 応用テクニック紹介：AIに「分析」と「評価(レビュー)」をさせる</h2>
+                        <p class="text-gray-700 leading-relaxed mb-8">今回は、既にある情報（文章やデータ）をAIに「食べさせて」、それを処理させるテクニックを学びます。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:scale-105"><div class="text-3xl mb-3">📄➡️🧠</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">① 大量の情報を「食べさせる」技術</h3><p class="text-gray-600">Web記事や資料のテキストをプロンプトに含め、「この記事を3行で要約して」「このデータから読み取れる傾向は？」といった指示を出すことで、AIを情報処理ツールとして活用します。</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:scale-105"><div class="text-3xl mb-3">🤔➡️🧐</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">② AIに「評価(レビュー)」させる技術</h3><p class="text-gray-600">自分の考えをAIに提示し、「批判的な視点から質問や反論をしてください」のように、あえて<strong>反対意見を求める</strong>ことで、自分の思考の穴や見落としを発見します。</p></div>
+                        </div>
+                    </section>
+                    <section id="demos" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">2. AIによる分析と構造化 (デモ)</h2>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <div class="mb-6"><div class="flex border-b border-gray-200"><button id="tab-btn-1" class="tab-btn active py-2 px-4 font-semibold text-gray-600 transition">デモ１：要約と分析</button><button id="tab-btn-2" class="tab-btn py-2 px-4 font-semibold text-gray-600 transition">デモ２：データの構造化</button></div></div>
+                            <div id="tab-content-1" class="tab-content"><p class="text-gray-600 mb-4">少し長めの技術ニュース記事をAIに渡し、次のように指示します。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「この記事の要点を、高校生向けのプレゼンで使うために3つの箇条書きでまとめてください。また、この技術が社会に与える潜在的なメリットとデメリットをそれぞれ教えてください。」</code></pre><button class="copy-btn">コピー</button></div><p class="text-gray-600 mt-4">このように、AIは長い文章から要点を的確に抽出し、指定された視点で情報を整理することができます。</p></div>
+                            <div id="tab-content-2" class="tab-content hidden"><p class="text-gray-600 mb-4">ただのテキストとして与えられた実験データを、AIに整理させます。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「以下の実験データを、Markdownの表形式に整理してください。」\n（AIが表を作成した後）\n「ありがとう。では、その表をプログラムで使いやすいように、JSON形式に変換してください。」</code></pre><button class="copy-btn">コピー</button></div><p class="text-gray-600 mt-4">このように、AIは単なる文章生成ツールではなく、<strong>データのフォーマットを自在に変換する</strong>能力も持っています。</p></div>
+                        </div>
+                    </section>
+                    <section id="main-exercise" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">3. メイン演習：AIと「実験レポートの草案」を作成する</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">それでは、AIの分析能力を実際に体験してみましょう。今回は、2つの「モード」を使い分けることで、安全に成果物を作りつつ、AIならではの意外な発見も狙っていきます。</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-10">
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ1：情報提供】</h3><p class="text-gray-600 mb-4">まず、以下の「実験メモ」のテキスト全体をコピーし、AIに貼り付けて送信してください。これが今回の分析の元データになります。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">実験メモ\n\n目的：カップに入れたお湯が、時間とともにどう冷めていくかを観察する。\n方法：150mlの熱湯を陶器のカップに入れ、5分ごとに水温を計測する。室温は20度で一定とする。\n計測データ：\n・0分後: 90度\n・5分後: 75度\n・10分後: 65度\n・15分後: 58度\n・20分後: 52度\n気づき：最初の5分で一番温度が大きく下がった。時間が経つにつれて、温度の下がり方が緩やかになっている気がする。</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ2：構造化モードでレポートを作成】</h3><p class="text-gray-600 mb-4">まずは、安全かつ確実に成果物を得るための<strong>「構造化モード」</strong>です。第2回で学んだ「アウトライン・ファースト」の考え方を使い、レポートの骨子を作らせます。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">ありがとう。この実験メモを元に、簡単な実験レポートの草案を作成してください。レポートには『目的』『方法』『結果（表形式）』『考察』の4つの項目を含めてください。</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ3：発見モードで未知の気づきを探す】</h3><p class="text-gray-600 mb-4">レポートの草案が手に入ったら、次はAIの隠れた能力を引き出す<strong>「発見モード」</strong>に切り替えます。AIを一度こちらの枠組みから解放し、自由に分析させてみましょう。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">レポートの草案は一旦これでOKです。ところで、あなたは優秀な物理の先生だとします。私が最初に渡した実験メモだけを見て、何か私が見落としてそうな意外なパターン、実験の不備、あるいはもっと深掘りできそうな面白い点はありますか？自由に指摘してください。</code></pre><button class="copy-btn">コピー</button></div><p class="text-gray-600 mt-4">AIは、人間では気づきにくい視点（例：「カップの材質や形状は温度の下がり方にどう影響しますか？」「なぜ温度の下がり方が緩やかになるのか、ニュートンの冷却の法則と関係づけて説明できますか？」など）を提示してくれるかもしれません。</p></div>
+                        </div>
+                    </section>
+                </main>
+                <footer class="text-center mt-20 pt-10 border-t border-gray-200">
+                    <h2 class="text-2xl font-bold text-[#A58A73] mb-6">4. まとめ：AIは思考を加速させるツール</h2>
+                    <p class="text-gray-700 leading-relaxed mb-8">お疲れ様でした！今日の演習では、まず「構造化モード」で安全にレポートの骨子を作り、次に「発見モード」でAIならではの鋭い指摘を引き出す、という2つのモードを体験しました。</p>
+                    <div class="space-y-8">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-green-200"><h3 class="font-bold text-lg mb-2 text-green-800">【Tips】目的に応じてAIとの「対話モード」を切り替えよう</h3><p class="text-gray-600">このように、AIとの付き合い方にはいくつかのモードがあります。<br><strong>構造化モード</strong>：確実に成果物を作りたい時。アウトラインを決め、それに沿って作業させる。<br><strong>発見モード</strong>：新しいアイデアや、自分では気づけない視点が欲しい時。AIに自由な分析を促す。</p></div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-blue-200"><h3 class="font-bold text-lg mb-2 text-blue-800">【発展Tips】資料を「丸ごと」食べさせたいなら：NotebookLM</h3><p class="text-gray-600">今日の演習では短いテキストを与えましたが、「教科書のPDFや講義ノートを丸ごとAIに読み込ませたい」と思うこともあるでしょう。そんな時に役立つのがGoogleの<strong>「NotebookLM」</strong>です。</p><p class="text-gray-600 mt-2">NotebookLMは<strong>あなたがアップロードした資料だけ</strong>を情報源にするため、「もっともらしいウソ」が起きにくく、講義ノートを元にした<strong>「自分専用の家庭教師」</strong>として、レポート作成や試験勉強で非常に頼りになります。</p><p class="text-gray-600 mt-2">興味がある人は、ぜひ「NotebookLM」で検索して、自主的に触ってみてください。</p></div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mt-8">AIは、文章作成を手伝ってくれるだけではありません。情報分析、データ整理、そして自分の考えを深めるための<strong>「壁打ち相手」</strong>として、私たちの思考そのものを加速させてくれる強力なツールなのです。</p>
+                    <div class="mt-12 flex justify-center">
+                        <button class="next-btn bg-[#A58A73] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#8e7661] transition" data-next="content-4">第4回へ進む →</button>
+                    </div>
+                </footer>
+            `,
+            "content-4": `
+                <header class="text-center mb-16">
+                    <h1 class="text-4xl md:text-5xl font-bold text-[#A58A73] mb-4">生成AI入門講座 第4回</h1>
+                    <p class="text-lg text-gray-600">AIをあなたの「専門家チーム」にする</p>
+                </header>
+                <main>
+                    <section id="introduction" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">はじめに</h2>
+                        <div class="space-y-4 text-gray-700 leading-relaxed bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <p>皆さん、こんにちは！いよいよ最終回となる第4回講座へようこそ。</p>
+                            <p>第3回では、「構造化モード」と「発見モード」を使い分け、AIに情報分析や評価(レビュー)をさせることで、AIが強力な<strong>「分析・評価ツール」</strong>になることを学びました。</p>
+                            <p>最終回では、これまでのスキルを総動員します。AIを<strong>「プログラマー」「プレゼンコンサルタント」「アイデア発想パートナー」</strong>といった、多才な専門家チームとして活用する方法をマスターしましょう。</p>
+                        </div>
+                    </section>
+                    <section id="techniques" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">1. 応用テクニック紹介：AIの多才な能力</h2>
+                        <p class="text-gray-700 leading-relaxed mb-8">AIは文章を作るだけでなく、より専門的で創造的なタスクも手伝ってくれます。今回は、高専生の皆さんに特に役立つ3つの能力を紹介します。</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:scale-105"><div class="text-3xl mb-3">💻</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">① プログラミング支援</h3><p class="text-gray-600">簡単なプログラム作成、コード解説、エラー特定、コード改善（リファクタリング）など、学習のあらゆる場面で強力なサポーターになります。</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:scale-105"><div class="text-3xl mb-3">📊</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">② プレゼン資料作成支援</h3><p class="text-gray-600">構成案、スライド内容の要点、想定問答集まで、プレゼン準備の大部分をAIが手伝ってくれます。</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 transition-transform transform hover:scale-105"><div class="text-3xl mb-3">💡</div><h3 class="font-bold text-lg mb-2 text-[#A58A73]">③ アイデア発想支援</h3><p class="text-gray-600">AIに様々な役割を与えることで、「〇〇の立場で」多様な視点からアイデアを無限に引き出せます。</p></div>
+                        </div>
+                    </section>
+                    <section id="demos" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">2. デモ：AI専門家チームの実力</h2>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                            <div class="mb-6"><div class="flex border-b border-gray-200"><button id="tab-btn-1" class="tab-btn active py-2 px-4 font-semibold text-gray-600 transition">プログラマーAI</button><button id="tab-btn-2" class="tab-btn py-2 px-4 font-semibold text-gray-600 transition">プレゼンコンサルAI</button><button id="tab-btn-3" class="tab-btn py-2 px-4 font-semibold text-gray-600 transition">アイデア発想AI</button></div></div>
+                            <div id="tab-content-1" class="tab-content"><p class="text-gray-600 mb-4">具体的な目的を伝えれば、AIはすぐに動くコードと、その解説を生成してくれます。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「Pythonで、リスト内の数値の平均を計算する簡単な関数を作って。コードにはコメントも付けて解説してね」</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div id="tab-content-2" class="tab-content hidden"><p class="text-gray-600 mb-4">AIは、聞き手の興味を引くようなストーリー性のある構成を提案してくれます。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「『再生可能エネルギーの未来』というテーマで、5分間のプレゼンをします。聞き手が飽きないような、面白い構成案を3つのパートで考えてください」</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div id="tab-content-3" class="tab-content hidden"><p class="text-gray-600 mb-4">複数の役割を与えることで、AIは一つのテーマに対して多角的なアイデアを生成し、発想を広げてくれます。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「高専の文化祭で、テクノロジーを使った面白い出し物をしたいです。イベントプランナー、エンジニア、来場者の3つの視点から、それぞれアイデアを3つずつ出してください」</code></pre><button class="copy-btn">コピー</button></div></div>
+                        </div>
+                    </section>
+                    <section id="main-exercise" class="mb-20">
+                        <h2 class="text-2xl font-bold text-[#A58A73] border-b-2 border-[#D4C5B8] pb-2 mb-6">3. 総合演習：AIチームと「新技術の紹介プレゼン」を企画する</h2>
+                        <p class="text-gray-700 leading-relaxed mb-6">それでは、これまでに学んだ全てのテクニックを使い、AIチームと一緒に簡単なプレゼンテーションを企画してみましょう。</p>
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 space-y-10">
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ1：アイデア発想と構成案作成】</h3><p class="text-gray-600 mb-4">まず、AIに<strong>アイデア発想パートナー</strong>になってもらい、プレゼンのテーマや切り口についてブレインストーミングします。次に、第2回で学んだ「インタビュアー」方式で、構成案（アウトライン）を固めていきましょう。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「『空飛ぶクルマ』についてプレゼンをしたいです。まずは、聞き手が一番興味を持ちそうな面白い切り口のアイデアを3つ出してください。」\n（アイデアが決まったら）\n「そのアイデアで進めます。プレゼンの構成案を作りたいので、必要な情報を僕に質問しながら手伝ってください。」</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ2：スクリプトと視覚資料のアイデア出し】</h3><p class="text-gray-600 mb-4">固まった構成案の中から一つのスライドを選び、AIに<strong>スクリプトの要点</strong>と<strong>視覚資料のアイデア</strong>を相談してみましょう。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「構成案の『１．空飛ぶクルマとは？』のスライドで話す内容の要点を、箇条書きで3つ作成してください。」\n\n「ありがとう。その内容を説明するのに、どんな図やグラフがあれば一番分かりやすいと思いますか？アイデアをください。」</code></pre><button class="copy-btn">コピー</button></div></div>
+                            <div><h3 class="font-bold text-xl mb-4 text-gray-800">【ステップ3：想定問答の準備】</h3><p class="text-gray-600 mb-4">最後に、プレゼンの質をさらに高めるため、AIに<strong>レビューア</strong>の役割を与えて、想定問答集を作成します。</p><div class="relative"><pre class="prompt-block p-4 rounded-md"><code class="language-text">「あなたはこの分野に詳しい、少し意地悪な質問をする聴衆です。ここまでのプレゼン内容に対して、僕が答えに詰まってしまいそうな鋭い質問を3つしてください。」</code></pre><button class="copy-btn">コピー</button></div></div>
+                        </div>
+                    </section>
+                </main>
+                <footer class="text-center mt-20 pt-10 border-t border-gray-200">
+                    <h2 class="text-2xl font-bold text-[#A58A73] mb-6">4. まとめ：AIと共に学び続ける</h2>
+                    <p class="text-gray-700 leading-relaxed mb-6">お疲れ様でした！これで4回にわたる入門講座は終了です。この講座を通じて、皆さんとAIとの関係は、どのように進化してきたでしょうか。</p>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-200 max-w-2xl mx-auto">
+                        <ul class="space-y-4 text-left">
+                            <li class="flex items-center gap-3"><span class="text-2xl">✅</span> <strong>第1回</strong>：AIを便利な<strong>アシスタント</strong>にしました。</li>
+                            <li class="flex items-center gap-3"><span class="text-2xl">✅</span> <strong>第2回</strong>：AIを一緒に成果物を作る<strong>共同作業者</strong>にしました。</li>
+                            <li class="flex items-center gap-3"><span class="text-2xl">✅</span> <strong>第3回</strong>：AIに分析・評価をさせて<strong>思考加速ツール</strong>にしました。</li>
+                            <li class="flex items-center gap-3"><span class="text-2xl">✅</span> <strong>第4回</strong>：AIを多才な<strong>専門家チーム</strong>として活用しました。</li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mt-8">AIは、私たちの能力を拡張し、学びを加速させるための強力なパートナーです。しかし、その性能は日進月歩で進化しています。今日学んだことは、あくまで出発点です。</p>
+                    <p class="text-gray-700 leading-relaxed mt-4">これからもAIとの対話を楽しみながら、皆さん自身で新しい使い方を発見し、未来を創造するツールとして使いこなしていってください。</p>
+                </footer>
+            `
+        };
+
+        // Inject content into sections
+        for (const id in contents) {
+            document.getElementById(id).innerHTML = contents[id];
+        }
+
+        function showContent(targetId) {
+            contentSections.forEach(section => {
+                section.classList.toggle('hidden', section.id !== targetId);
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.toggle('active', link.dataset.target === targetId);
+            });
+            mainContent.scrollTop = 0; // Scroll to top
+        }
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = e.currentTarget.dataset.target;
+                showContent(targetId);
+                if (window.innerWidth < 640) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        // Next button functionality
+        document.body.addEventListener('click', (e) => {
+            if (e.target.classList.contains('next-btn')) {
+                const nextTarget = e.target.dataset.next;
+                showContent(nextTarget);
+            }
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
+
+        // --- Event Delegation for interactive elements ---
+        document.getElementById('main-content').addEventListener('click', (event) => {
+            // Copy to Clipboard
+            const copyButton = event.target.closest('.copy-btn');
+            if (copyButton) {
+                const pre = copyButton.closest('.relative').querySelector('pre');
+                const text = pre.querySelector('code').innerText;
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    copyButton.innerText = 'コピー完了！';
+                    setTimeout(() => {
+                        copyButton.innerText = 'コピー';
+                    }, 2000);
+                } catch (err) {
+                    console.error('コピーに失敗しました', err);
+                    copyButton.innerText = '失敗';
+                }
+                document.body.removeChild(textarea);
+                return; // Stop further processing
+            }
+
+            // Timeline Item Toggle
+            const timelineItem = event.target.closest('.timeline-item');
+            if (timelineItem) {
+                timelineItem.classList.toggle('active');
+                const allItems = timelineItem.parentElement.querySelectorAll('.timeline-item');
+                allItems.forEach(otherItem => {
+                    if (otherItem !== timelineItem) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                return;
+            }
+
+            // Tab Switching
+            const tabButton = event.target.closest('.tab-btn');
+            if (tabButton) {
+                 const parentSection = tabButton.closest('.bg-white');
+                 const allTabButtons = parentSection.querySelectorAll('.tab-btn');
+                 const allTabContents = parentSection.querySelectorAll('.tab-content');
+                 
+                 let tabIndex = -1;
+                 allTabButtons.forEach((btn, index) => {
+                    if(btn === tabButton) tabIndex = index;
+                 });
+
+                 if(tabIndex !== -1) {
+                    allTabButtons.forEach((btn, index) => {
+                        btn.classList.toggle('active', index === tabIndex);
+                        if(btn.querySelector('.step-indicator')) {
+                           btn.querySelector('.step-indicator').classList.toggle('active', index === tabIndex);
+                        }
+                    });
+                    allTabContents.forEach((content, index) => {
+                        content.classList.toggle('hidden', index !== tabIndex);
+                    });
+                 }
+                 return;
+            }
+        });
+
+
+        // Initialize first page
+        showContent('content-0');
+    });
+    </script>
+</body>
+</html>
